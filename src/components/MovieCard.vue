@@ -8,11 +8,14 @@
         <div class="grey--text ms-2 subtitle-1">{{ movieRate }}/10</div>
       </v-row>
       <div class="my-4 text-subtitle-1">
-        {{ $t("movieCard.releaseDate") }} {{ new Date(movieReleaseDate).getFullYear() }}
+        {{ $t("movieCard.releaseDate") }}
+        {{ new Date(movieReleaseDate).getFullYear() }}
       </div>
     </v-card-text>
     <v-card-actions>
-      <v-btn color="primary lighten-2" text> {{ $t("movieCard.detail") }} </v-btn>
+      <v-btn color="primary lighten-2" text>
+        {{ $t("movieCard.detail") }}
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>

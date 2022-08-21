@@ -19,18 +19,7 @@
                 </v-btn>
               </template>
               <v-list>
-                <div class="d-flex search-content">
-                  <v-text-field
-                    flat
-                    hide-details
-                    append-icon="mdi-magnify"
-                    :placeholder="$t('header.searchInputPlaceholder')"
-                    outlined
-                    dense
-                    v-model="q"
-                    @click:append="handleSearch"
-                  ></v-text-field>
-                </div>
+                <Search />
               </v-list>
             </v-menu>
           </v-list-item>
@@ -58,21 +47,16 @@
 </template>
 
 <script>
+import Search from "@/components/Search";
+
 export default {
   name: "Header",
   data: () => ({
     drawer: false,
     group: null,
-    q: null,
   }),
-  methods: {
-    handleSearch() {
-      if (!this.q.trim()) return;
-      this.$router.push(`/search/${this.q}`).catch(() => {});
-    },
-    selectLang(lang) {
-      this.$i18n.locale = lang;
-    },
+  components: {
+    Search,
   },
 };
 </script>
