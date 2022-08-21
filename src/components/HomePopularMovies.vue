@@ -6,6 +6,7 @@
       v-for="item in getPopularMovies?.data?.results"
       :key="item.id"
       :title="item.title"
+      class="col-12"
     >
       <MovieCard
         :movieName="item.title"

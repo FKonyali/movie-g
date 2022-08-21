@@ -54,12 +54,17 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .sticky-top {
   position: sticky;
   top: 0;
-  height: 100vh;
+  height: 100%;
   padding-top: 84px;
   margin-top: -64px;
+  background: #FFF;
+  z-index: 1;
+  .v-text-field__details {
+    display: none;
+  }
 }
 </style>
