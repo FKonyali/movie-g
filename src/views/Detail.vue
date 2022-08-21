@@ -12,7 +12,7 @@
         <v-btn class="ma-2" outlined large fab color="indigo">
           <v-icon>mdi-arrow-left</v-icon>
         </v-btn>
-        Go Back
+        {{ $t("movieDetailPage.goBack") }}
       </v-btn>
     </div>
     <v-row>
@@ -47,7 +47,7 @@
           </h3>
           <v-row>
             <v-col cols="auto">
-              <h2>Genres:</h2>
+              <h2>{{ $t("movieDetailPage.genres") }}</h2>
             </v-col>
             <v-col>
               <v-chip
@@ -62,7 +62,7 @@
           <p class="mt-5">
             {{ getMovieDetails?.overview }}
           </p>
-          <h2 class="mb-5 mt-5">Top cast:</h2>
+          <h2 class="mb-5 mt-5">{{ $t("movieDetailPage.topCast") }}</h2>
           <v-row>
             <v-col
               md="6"

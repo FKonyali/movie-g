@@ -2,16 +2,25 @@ import axios from "axios";
 
 let API_URL = "";
 
-if (window._env_ && window._env_.REACT_APP_API_URL) {
-  API_URL = window._env_.REACT_APP_API_URL;
+if (window._env_ && window._env_.VUE_APP_API_URL) {
+  API_URL = window._env_.VUE_APP_API_URL;
 } else {
-  API_URL = process.env.REACT_APP_API_URL;
+  API_URL = process.env.VUE_APP_API_URL;
+}
+
+let API_KEY = "";
+
+if (window._env_ && window._env_.VUE_APP_API_KEY) {
+  API_KEY = window._env_.VUE_APP_API_KEY;
+} else {
+  API_KEY = process.env.VUE_APP_API_KEY;
 }
 
 axios.defaults.baseURL = API_URL;
 
 export default {
   async popularMovies(context, { perPage, lang }) {
+    console.log("deneme", this);
     if (perPage === context?.getters?.getPopularMovies?.data?.page) return;
     if (perPage >= context?.getters?.getSearchMovies?.data?.total_pages) return;
     context.commit("updatePopularMovies", {
@@ -20,7 +29,7 @@ export default {
     });
     try {
       const { data } = await axios.get(
-        `https://api.themoviedb.org/3/movie/popular?api_key=6c275970bcd27b8212f49859e29153d6&language=${lang}&page=${perPage}`
+        `movie/popular?api_key=${API_KEY}&language=${lang}&page=${perPage}`
       );
       const prevResultData = context?.getters?.getPopularMovies?.data?.results
         ? context?.getters?.getPopularMovies?.data?.results
@@ -51,7 +60,7 @@ export default {
     });
     try {
       const { data } = await axios.get(
-        `https://api.themoviedb.org/3/movie/top_rated?api_key=6c275970bcd27b8212f49859e29153d6&language=${lang}&page=${perPage}`
+        `movie/top_rated?api_key=${API_KEY}&language=${lang}&page=${perPage}`
       );
       const prevResultData = context?.getters?.getTopRatedMovies?.data?.results
         ? context?.getters?.getTopRatedMovies?.data?.results
@@ -82,7 +91,7 @@ export default {
     });
     try {
       const { data } = await axios.get(
-        `https://api.themoviedb.org/3/movie/${movieID}?api_key=6c275970bcd27b8212f49859e29153d6&language=en-US`
+        `movie/${movieID}?api_key=${API_KEY}&language=en-US`
       );
       const prevResultData = context?.getters?.getMovieDetails?.data?.results
         ? context?.getters?.getMovieDetails?.data?.results
@@ -113,7 +122,7 @@ export default {
     });
     try {
       const { data } = await axios.get(
-        `https://api.themoviedb.org/3/movie/${movieID}/credits?api_key=6c275970bcd27b8212f49859e29153d6&language=en-US`
+        `movie/${movieID}/credits?api_key=${API_KEY}&language=en-US`
       );
       const prevResultData = context?.getters?.getMovieDetails?.data?.results
         ? context?.getters?.getMovieCredits?.data?.results
@@ -147,7 +156,7 @@ export default {
     });
     try {
       const { data } = await axios.get(
-        `https://api.themoviedb.org/3/search/movie?api_key=6c275970bcd27b8212f49859e29153d6&language=${lang}&query=${q}&page=${perPage}&include_adult=false`
+        `search/movie?api_key=${API_KEY}&language=${lang}&query=${q}&page=${perPage}&include_adult=false`
       );
       const prevResultData =
         prevData && prevData[q]?.results ? prevData[q]?.results : [];

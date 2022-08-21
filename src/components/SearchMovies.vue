@@ -11,6 +11,7 @@
       v-for="item in getSearchMovies?.data[$route.params.q]?.results"
       :key="item.id"
       :title="item.title"
+      class="col-12"
     >
       <MovieCard
         :movieName="item.title"
@@ -88,7 +89,6 @@ export default {
   },
   watch: {
     "$route.params.q": function () {
-      console.log("...değişiyor", this.$route.params.q);
       this.$store.dispatch("searchMovies", {
         perPage: this.perPage,
         lang: "en-US",

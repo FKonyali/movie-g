@@ -3,7 +3,7 @@
     <v-select
       v-model="orderSelect"
       :items="orderItems"
-      label="Sort Movies by"
+      :label="$t('filter.selectPlaceholder')"
       outlined
       item-text="name"
       item-value="id"
@@ -20,16 +20,16 @@ export default {
       perPage: 1,
       orderSelect: {
         id: 0,
-        name: "Popular",
+        name: this.$t("filter.popular"),
       },
       orderItems: [
         {
           id: 0,
-          name: "Popular",
+          name: this.$t("filter.popular"),
         },
         {
           id: 1,
-          name: "Rating Descending",
+          name: this.$t("filter.ratingDescending"),
         },
       ],
     };

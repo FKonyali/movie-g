@@ -3,11 +3,6 @@
     <v-app-bar app color="primary" dark>
       <v-container class="d-flex align-center">
         <div class="d-flex align-center">
-          <v-app-bar-nav-icon
-            @click="drawer = true"
-            class="v-app-bar__nav-icon hidden-md-and-up v-btn v-btn--flat v-btn--icon v-btn--round theme--light v-size--default"
-          >
-          </v-app-bar-nav-icon>
           <v-toolbar-title>
             <router-link to="/" class="white--text text-decoration-none">
               Movie-g
@@ -29,7 +24,7 @@
                     flat
                     hide-details
                     append-icon="mdi-magnify"
-                    placeholder="Search"
+                    :placeholder="$t('header.searchInputPlaceholder')"
                     outlined
                     dense
                     v-model="q"
@@ -47,10 +42,10 @@
                 </v-btn>
               </template>
               <v-list>
-                <v-list-item link>
+                <v-list-item link @click="selectLang('tr')">
                   <v-list-item-title>Türkçe</v-list-item-title>
                 </v-list-item>
-                <v-list-item link>
+                <v-list-item link @click="selectLang('en')">
                   <v-list-item-title>English</v-list-item-title>
                 </v-list-item>
               </v-list>
@@ -59,18 +54,6 @@
         </v-list>
       </v-container>
     </v-app-bar>
-    <v-navigation-drawer v-model="drawer" absolute temporary>
-      <v-list nav dense>
-        <v-list-item-group v-model="group">
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-home</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Home</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer>
   </div>
 </template>
 
@@ -84,7 +67,11 @@ export default {
   }),
   methods: {
     handleSearch() {
+      if (!this.q.trim()) return;
       this.$router.push(`/search/${this.q}`).catch(() => {});
+    },
+    selectLang(lang) {
+      this.$i18n.locale = lang;
     },
   },
 };

@@ -1,0 +1,22 @@
+{
+  "header": {
+    "searchInputPlaceholder": "Ara"
+  },
+  "searchPage": {
+    "h1": "Arama Sonuçları"
+  },
+  "filter": {
+    "popular": "Popüler",
+    "ratingDescending": "Artan Oylar",
+    "selectPlaceholder": "Filmleri Sıralama Ölçütü"
+  },
+  "movieCard": {
+    "releaseDate": "Yayın yılı:",
+    "detail": "Detay"
+  },
+  "movieDetailPage": {
+    "genres": "Tür:",
+    "topCast": "Oyuncular:",
+    "goBack": "Geri git"
+  }
+}

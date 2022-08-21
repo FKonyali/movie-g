@@ -1,0 +1,22 @@
+{
+  "header": {
+    "searchInputPlaceholder": "Search"
+  },
+  "searchPage": {
+    "h1": "Search Results"
+  },
+  "filter": {
+    "popular": "Popular",
+    "ratingDescending": "Rating Descending",
+    "selectPlaceholder": "Sort Movies by"
+  },
+  "movieCard": {
+    "releaseDate": "Release date:",
+    "detail": "Detail"
+  },
+  "movieDetailPage": {
+    "genres": "Genres:",
+    "topCast": "Top cast:",
+    "goBack": "Go Back"
+  }
+}
