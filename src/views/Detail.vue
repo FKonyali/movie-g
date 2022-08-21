@@ -107,10 +107,12 @@ export default {
   created() {
     this.$store.dispatch("movieDetails", {
       movieID: this.$route.params.id,
+      lang: this.$i18n.locale,
     });
 
     this.$store.dispatch("movieCredits", {
       movieID: this.$route.params.id,
+      lang: this.$i18n.locale,
     });
   },
   computed: {

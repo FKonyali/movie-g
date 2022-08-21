@@ -50,7 +50,7 @@ export default {
     window.addEventListener("scroll", this.handleScroll);
     this.$store.dispatch("popularMovies", {
       perPage: this.perPage,
-      lang: "en-US",
+      lang: this.$i18n.locale,
     });
   },
   beforeDestroy() {
@@ -66,7 +66,7 @@ export default {
         this.perPage++;
         this.$store.dispatch("popularMovies", {
           perPage: this.perPage,
-          lang: "en-US",
+          lang: this.$i18n.locale,
         });
       }
     },

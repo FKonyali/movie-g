@@ -20,7 +20,6 @@ axios.defaults.baseURL = API_URL;
 
 export default {
   async popularMovies(context, { perPage, lang }) {
-    console.log("deneme", this);
     if (perPage === context?.getters?.getPopularMovies?.data?.page) return;
     if (perPage >= context?.getters?.getSearchMovies?.data?.total_pages) return;
     context.commit("updatePopularMovies", {
@@ -82,7 +81,7 @@ export default {
       });
     }
   },
-  async movieDetails(context, { movieID }) {
+  async movieDetails(context, { movieID, lang }) {
     if (movieID === context?.getters?.getPopularMovies?.data?.results?.movieID)
       return;
     context.commit("updateMovieDetails", {
@@ -91,7 +90,7 @@ export default {
     });
     try {
       const { data } = await axios.get(
-        `movie/${movieID}?api_key=${API_KEY}&language=en-US`
+        `movie/${movieID}?api_key=${API_KEY}&language=${lang}`
       );
       const prevResultData = context?.getters?.getMovieDetails?.data?.results
         ? context?.getters?.getMovieDetails?.data?.results
@@ -115,14 +114,14 @@ export default {
       });
     }
   },
-  async movieCredits(context, { movieID }) {
+  async movieCredits(context, { movieID, lang }) {
     context.commit("updateMovieCredits", {
       ...context.getters.getMovieCredits,
       status: "PENDING",
     });
     try {
       const { data } = await axios.get(
-        `movie/${movieID}/credits?api_key=${API_KEY}&language=en-US`
+        `movie/${movieID}/credits?api_key=${API_KEY}&language=${lang}`
       );
       const prevResultData = context?.getters?.getMovieDetails?.data?.results
         ? context?.getters?.getMovieCredits?.data?.results
