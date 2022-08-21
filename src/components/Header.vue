@@ -84,7 +84,7 @@ export default {
   }),
   methods: {
     handleSearch() {
-      console.log("...");
+      this.$router.push(`/search/${this.q}`).catch(() => {});
     },
   },
 };

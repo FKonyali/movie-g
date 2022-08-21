@@ -19,4 +19,8 @@ export default {
     status: null,
     data: null,
   },
+  searchMovies: {
+    status: null,
+    data: null,
+  },
 };

@@ -14,4 +14,7 @@ export default {
   getMovieCredits(state) {
     return state.movieCredits;
   },
+  getSearchMovies(state) {
+    return state.searchMovies;
+  },
 };

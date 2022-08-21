@@ -1,8 +1,6 @@
 <template>
   <v-card class="mx-auto my-1" link :to="movieSlug">
-    <v-responsive :aspect-ratio="6 / 9">
-      <v-img :src="movieImage"></v-img>
-    </v-responsive>
+    <v-img :src="movieImage" :aspect-ratio="6 / 9"></v-img>
     <v-card-title class="card-title"> {{ movieName }} </v-card-title>
     <v-card-text class="pb-0">
       <v-row align="center" class="mx-0">

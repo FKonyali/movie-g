@@ -13,6 +13,7 @@ axios.defaults.baseURL = API_URL;
 export default {
   async popularMovies(context, { perPage, lang }) {
     if (perPage === context?.getters?.getPopularMovies?.data?.page) return;
+    if (perPage >= context?.getters?.getSearchMovies?.data?.total_pages) return;
     context.commit("updatePopularMovies", {
       ...context.getters.getPopularMovies,
       status: "PENDING",
@@ -43,6 +44,7 @@ export default {
   },
   async topRatedMovies(context, { perPage, lang }) {
     if (perPage === context?.getters?.getTopRatedMovies?.data?.page) return;
+    if (perPage >= context?.getters?.getSearchMovies?.data?.total_pages) return;
     context.commit("updateTopRatedMovies", {
       ...context.getters.getTopRatedMovies,
       status: "PENDING",
@@ -130,6 +132,40 @@ export default {
       console.log(error);
       context.commit("updateMovieCredits", {
         ...context.getters.getMovieCredits,
+        status: "FAILED",
+        data: error,
+      });
+    }
+  },
+  async searchMovies(context, { perPage, lang, q }) {
+    const prevData = context?.getters?.getSearchMovies?.data;
+    if (prevData && perPage === prevData[q]?.page) return;
+    if (prevData && perPage >= prevData[q]?.total_pages) return;
+    context.commit("updateSearchMovies", {
+      ...context.getters.getSearchMovies,
+      status: "PENDING",
+    });
+    try {
+      const { data } = await axios.get(
+        `https://api.themoviedb.org/3/search/movie?api_key=6c275970bcd27b8212f49859e29153d6&language=${lang}&query=${q}&page=${perPage}&include_adult=false`
+      );
+      const prevResultData =
+        prevData && prevData[q]?.results ? prevData[q]?.results : [];
+      context.commit("updateSearchMovies", {
+        ...context.getters.getSearchMovies,
+        status: "SUCCESS",
+        data: {
+          ...prevData,
+          [q]: {
+            ...data,
+            results: [...prevResultData, ...data.results],
+          },
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      context.commit("updateSearchMovies", {
+        ...context.getters.getMovieDetails,
         status: "FAILED",
         data: error,
       });

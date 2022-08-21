@@ -14,4 +14,7 @@ export default {
   updateMovieCredits(state, data) {
     state.movieCredits = data;
   },
+  updateSearchMovies(state, data) {
+    state.searchMovies = data;
+  },
 };

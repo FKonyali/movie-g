@@ -9,7 +9,10 @@
     >
       <MovieCard
         :movieName="item.title"
-        :movieImage="`https://image.tmdb.org/t/p/w500${item.poster_path}`"
+        :movieImage="
+          item.poster_path &&
+          `https://image.tmdb.org/t/p/w500${item.poster_path}`
+        "
         :moviePublishedDate="item.release_date"
         :movieSlug="`/movie/${item.id}`"
         :movieRate="item.vote_average"

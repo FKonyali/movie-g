@@ -1,9 +1,14 @@
 <template>
-  <v-row>
+  <v-row
+    v-if="
+      this.getSearchMovies.data &&
+      getSearchMovies?.data[$route.params.q]?.results?.length > 0
+    "
+  >
     <v-col
-      md="6"
-      sm="6"
-      v-for="item in getTopRatedMovies?.data?.results"
+      md="3"
+      sm="3"
+      v-for="item in getSearchMovies?.data[$route.params.q]?.results"
       :key="item.id"
       :title="item.title"
     >
@@ -23,18 +28,19 @@
       md="12"
       sm="12"
       class="text-center"
-      v-if="getTopRatedMovies.status === 'PENDING'"
+      v-if="getSearchMovies.status === 'PENDING'"
     >
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </v-col>
   </v-row>
+  <h2 class="mt-5" v-else>Movie Not Found</h2>
 </template>
 
 <script>
 import MovieCard from "@/components/MovieCard";
 
 export default {
-  name: "HomeTopRatedMovies",
+  name: "SearchMovies",
   components: {
     MovieCard,
   },
@@ -44,13 +50,16 @@ export default {
     };
   },
   created() {
-    this.perPage = this?.getTopRatedMovies?.data?.page
-      ? this.getTopRatedMovies.data.page
-      : 1;
+    this.perPage =
+      this.getSearchMovies.data &&
+      this.getSearchMovies?.data[this.$route.params.q]?.page
+        ? this.getSearchMovies.data[this.$route.params.q]?.page
+        : 1;
     window.addEventListener("scroll", this.handleScroll);
-    this.$store.dispatch("topRatedMovies", {
+    this.$store.dispatch("searchMovies", {
       perPage: this.perPage,
       lang: "en-US",
+      q: this.$route.params.q,
     });
   },
   beforeDestroy() {
@@ -61,19 +70,30 @@ export default {
       if (
         window.innerHeight + window.scrollY + 100 >=
           document.body.offsetHeight &&
-        this.getTopRatedMovies.status !== "PENDING"
+        this.getSearchMovies.status !== "PENDING"
       ) {
         this.perPage++;
-        this.$store.dispatch("topRatedMovies", {
+        this.$store.dispatch("searchMovies", {
           perPage: this.perPage,
           lang: "en-US",
+          q: this.$route.params.q,
         });
       }
     },
   },
   computed: {
-    getTopRatedMovies() {
-      return this.$store.getters.getTopRatedMovies;
+    getSearchMovies() {
+      return this.$store.getters.getSearchMovies;
+    },
+  },
+  watch: {
+    "$route.params.q": function () {
+      console.log("...değişiyor", this.$route.params.q);
+      this.$store.dispatch("searchMovies", {
+        perPage: this.perPage,
+        lang: "en-US",
+        q: this.$route.params.q,
+      });
     },
   },
 };
