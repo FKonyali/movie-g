@@ -12,6 +12,7 @@ axios.defaults.baseURL = API_URL;
 
 export default {
   async popularMovies(context, { perPage, lang }) {
+    if (perPage === context?.getters?.getPopularMovies?.data?.page) return;
     context.commit("updatePopularMovies", {
       ...context.getters.getPopularMovies,
       status: "PENDING",
@@ -23,7 +24,6 @@ export default {
       const prevResultData = context?.getters?.getPopularMovies?.data?.results
         ? context?.getters?.getPopularMovies?.data?.results
         : [];
-      if (perPage === context?.getters?.getPopularMovies?.data?.page) return;
       context.commit("updatePopularMovies", {
         ...context.getters.getPopularMovies,
         status: "SUCCESS",

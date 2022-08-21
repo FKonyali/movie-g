@@ -52,10 +52,10 @@ export default {
     };
   },
   created() {
-    this.scroll();
-    this.perPage = this?.getPopularMovies?.data?.perPage
-      ? this.getPopularMovies.data.perPage
+    this.perPage = this?.getPopularMovies?.data?.page
+      ? this.getPopularMovies.data.page
       : 1;
+    // this.scroll();
     this.$store.dispatch("popularMovies", {
       perPage: this.perPage,
       lang: "en-US",
@@ -63,6 +63,7 @@ export default {
   },
   methods: {
     scroll() {
+      console.log(this);
       window.addEventListener("scroll", () => {
         if (
           window.innerHeight + window.scrollY + 100 >=
