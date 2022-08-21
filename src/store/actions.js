@@ -41,7 +41,39 @@ export default {
       });
     }
   },
+  async topRatedMovies(context, { perPage, lang }) {
+    if (perPage === context?.getters?.getTopRatedMovies?.data?.page) return;
+    context.commit("updateTopRatedMovies", {
+      ...context.getters.getTopRatedMovies,
+      status: "PENDING",
+    });
+    try {
+      const { data } = await axios.get(
+        `https://api.themoviedb.org/3/movie/top_rated?api_key=6c275970bcd27b8212f49859e29153d6&language=${lang}&page=${perPage}`
+      );
+      const prevResultData = context?.getters?.getTopRatedMovies?.data?.results
+        ? context?.getters?.getTopRatedMovies?.data?.results
+        : [];
+      context.commit("updateTopRatedMovies", {
+        ...context.getters.getTopRatedMovies,
+        status: "SUCCESS",
+        data: {
+          ...data,
+          results: [...prevResultData, ...data.results],
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      context.commit("updateTopRatedMovies", {
+        ...context.getters.getMovieDetails,
+        status: "FAILED",
+        data: error,
+      });
+    }
+  },
   async movieDetails(context, { movieID }) {
+    if (movieID === context?.getters?.getPopularMovies?.data?.results?.movieID)
+      return;
     context.commit("updateMovieDetails", {
       ...context.getters.getMovieDetails,
       status: "PENDING",

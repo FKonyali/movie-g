@@ -47,7 +47,7 @@ export default {
 };
 </script>
 
-<style style="scss" scoped>
+<style lang="scss" scoped>
 .card-title {
   display: inline-block;
   text-overflow: ellipsis;

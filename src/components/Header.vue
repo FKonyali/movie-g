@@ -90,7 +90,7 @@ export default {
 };
 </script>
 
-<style style="scss" scoped>
+<style lang="scss" scoped>
 .search-content {
   padding: 20px;
 }

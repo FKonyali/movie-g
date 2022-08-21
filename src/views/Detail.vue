@@ -37,7 +37,13 @@
           </h3>
           <h3 class="d-flex align-center">
             <v-icon color="#f5c518">mdi-star</v-icon>
-            <div class="grey--text ms-2 subtitle-1">{{ (Math.round((getMovieDetails?.vote_average) * 100) / 100).toFixed(1) }}/10</div>
+            <div class="grey--text ms-2 subtitle-1">
+              {{
+                (Math.round(getMovieDetails?.vote_average * 100) / 100).toFixed(
+                  1
+                )
+              }}/10
+            </div>
           </h3>
           <v-row>
             <v-col cols="auto">
@@ -127,7 +133,7 @@ export default {
 };
 </script>
 
-<style style="scss" scoped>
+<style lang="scss" scoped>
 .cast-no-avatar {
   color: #fff;
 }

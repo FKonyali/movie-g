@@ -1,5 +1,13 @@
 export default {
+  orderSelect: {
+    id: null,
+    name: null,
+  },
   popularMovies: {
+    status: null,
+    data: null,
+  },
+  topRatedMovies: {
     status: null,
     data: null,
   },
