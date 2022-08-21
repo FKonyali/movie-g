@@ -1,4 +1,10 @@
-# movie-g
+# Movie-g
+
+> Movie-g is a movie app that uses TMDB Api, made with vue 2.x/vuetify.
+
+```
+node version: v14.16.1
+```
 
 ## Project setup
 ```
