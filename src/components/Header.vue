@@ -58,6 +58,11 @@ export default {
   components: {
     Search,
   },
+  methods: {
+    selectLang(lang) {
+      this.$i18n.locale = lang;
+    },
+  },
 };
 </script>
 

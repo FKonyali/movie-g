@@ -24,9 +24,6 @@ export default {
       if (!this.q.trim()) return;
       this.$router.push(`/search/${this.q}`).catch(() => {});
     },
-    selectLang(lang) {
-      this.$i18n.locale = lang;
-    },
   },
 };
 </script>
