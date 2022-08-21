@@ -2,7 +2,7 @@
   <div class="home">
     <v-row>
       <Sidebar />
-      <v-col md="8">
+      <v-col md="8" class="col-12">
         <HomePopularMovies v-if="getOrderSelect.id === 0" />
         <HomeTopRatedMovies v-if="getOrderSelect.id === 1" />
       </v-col>

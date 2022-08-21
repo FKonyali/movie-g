@@ -28,7 +28,7 @@
     <v-col
       md="12"
       sm="12"
-      class="text-center"
+      class="text-center col-12"
       v-if="getSearchMovies.status === 'PENDING'"
     >
       <v-progress-circular indeterminate color="primary"></v-progress-circular>

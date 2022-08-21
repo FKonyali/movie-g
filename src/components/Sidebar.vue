@@ -1,5 +1,5 @@
 <template>
-  <v-col md="4" class="sticky-top">
+  <v-col md="4" class="sticky-top col-12">
     <v-select
       v-model="orderSelect"
       :items="orderItems"

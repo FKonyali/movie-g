@@ -16,7 +16,7 @@
       </v-btn>
     </div>
     <v-row>
-      <v-col md="4" sm="4">
+      <v-col md="4" sm="4" class="col-12">
         <v-img
           v-if="getMovieDetails?.poster_path"
           :src="`https://image.tmdb.org/t/p/w500${getMovieDetails?.poster_path}`"
@@ -27,7 +27,7 @@
           type="image"
         ></v-skeleton-loader>
       </v-col>
-      <v-col md="8" sm="8">
+      <v-col md="8" sm="8" class="col-12">
         <div v-if="getMovieDetails">
           <h1 class="text-h4 mb-1 font-weight-bold">
             {{ getMovieDetails?.title }}
