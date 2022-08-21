@@ -55,28 +55,28 @@ export default {
     this.perPage = this?.getPopularMovies?.data?.page
       ? this.getPopularMovies.data.page
       : 1;
-    // this.scroll();
+    window.addEventListener("scroll", this.handleScroll);
     this.$store.dispatch("popularMovies", {
       perPage: this.perPage,
       lang: "en-US",
     });
   },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
   methods: {
-    scroll() {
-      console.log(this);
-      window.addEventListener("scroll", () => {
-        if (
-          window.innerHeight + window.scrollY + 100 >=
-            document.body.offsetHeight &&
-          this.getPopularMovies.status !== "PENDING"
-        ) {
-          this.perPage++;
-          this.$store.dispatch("popularMovies", {
-            perPage: this.perPage,
-            lang: "en-US",
-          });
-        }
-      });
+    handleScroll() {
+      if (
+        window.innerHeight + window.scrollY + 100 >=
+          document.body.offsetHeight &&
+        this.getPopularMovies.status !== "PENDING"
+      ) {
+        this.perPage++;
+        this.$store.dispatch("popularMovies", {
+          perPage: this.perPage,
+          lang: "en-US",
+        });
+      }
     },
   },
   computed: {
